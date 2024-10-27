@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh; 
+            background-color: #f4f4f4;
+            width: 100vw; 
+        }
+        .container {
+            width: 100%; 
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            min-height: 100vh; 
+            overflow-y: auto; 
+        }
+        .sidebar {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 20px;
+        }
+        .sidebar h2 {
+            color: #007bff;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .sidebar ul li:hover {
+            background-color: #007bff;
+        }
+        .sidebar ul li.active {
+            background-color: #007bff;
+        }
+        .content {
+            padding: 30px;
+            height: 100%; 
+            overflow-y: auto; 
+        }
+        .content h2 {
+            color: #333;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .content section {
+            display: none;
+            margin-top: 20px;
+        }
+        .content section.active {
+            display: block;
+        }
+        .content label {
+            display: block;
+            margin-top: 10px;
+        }
+        .content input, .content select, .content button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            border: none;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+ 
+    <div class="container">
+ 
+        <div class="sidebar">
+            <h2 id="settingsTitle">Settings</h2>
+            <ul>
+                <li id="accountTab"class="active">Your Account</li>
+                <li id="privacyTab">Privacy and Safety</li>
+                <li id="accessibilityTab">Accessibility</li>
+                <li id="helpTab">Help Center</li>
+                <li id="Back"><a href="feed.php">Back</a></li>
+            </ul>
+        </div>
+       
+        <div class="content">
+ 
+            <section id="accountSection" class="active">
+                <h2 id="accountTitle">Your Account</h2>
+                <label for="username" id="accountInfoLabel">Account Information</label>
+                <input type="text" id="username" placeholder="Change Username">
+ 
+                <label for="password" id="changePasswordLabel">Change Password</label>
+                <input type="password" id="password" placeholder="Change Password">
+ 
+                <label for="deactivate" id="deactivateLabel">Deactivate Account</label>
+                <button id="deactivate">Deactivate Account</button>
+            </section>
+           
+            <section id="privacySection">
+                <h2 id="privacyTitle">Privacy and Safety</h2>
+                <label for="posts" id="yourPostsLabel">Your Posts</label>
+                <select id="posts">
+                    <option>Everyone</option>
+                    <option>Followers</option>
+                    <option>Only Me</option>
+                </select>
+ 
+                <label for="content" id="contentLabel">Content You See</label>
+                <select id="content">
+                    <option>All Content</option>
+                    <option>Filtered Content</option>
+                </select>
+ 
+                <label for="mute" id="muteLabel">Mute and Block</label>
+                <select id="mute">
+                    <option>No Accounts Muted or Blocked</option>
+                </select>
+ 
+                <label for="messages" id="messagesLabel">Direct Messages</label>
+                <select id="messages">
+                    <option>Everyone</option>
+                    <option>Followers</option>
+                </select>
+ 
+                <label for="ads" id="adsLabel">Ad Preferences</label>
+                <select id="ads">
+                    <option>Personalized Ads</option>
+                    <option>Non-Personalized Ads</option>
+                </select>
+ 
+                <label for="location" id="locationLabel">Location Information</label>
+                <select id="location">
+                    <option>Use Location</option>
+                    <option>Do Not Use Location</option>
+                </select>
+            </section>
+           
+            <section id="accessibilitySection">
+                <h2 id="accessibilityTitle">Accessibility</h2>
+                <label for="language" id="changeLanguageLabel">Change Language</label>
+                <select id="language">
+                    <option value="English">English</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="French">French</option>
+                </select>
+ 
+                <label for="theme" id="themeLabel">Theme</label>
+                <select id="theme">
+                    <option>Light Theme</option>
+                    <option>Dark Theme</option>
+                </select>
+ 
+                <label for="display" id="displayLabel">Display Settings</label>
+                <select id="display">
+                    <option>Default</option>
+                    <option>Large Text</option>
+                    <option>High Contrast</option>
+                </select>
+            </section>
+ 
+            <section id="helpSection">
+                <h2 id="helpTitle">Help Center</h2>
+                <p id="helpText">Visit our <a href="#" style="color: blue;">Help Center</a> for more information or to submit a support ticket.</p>
+                <p id="helpText2">If you have any issues or questions, you can contact our support team through the Help Center.</p>
+
+            <video id="helpVideo" controls width="550">
+                <source src="helpvideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+ 
+            </section>
+            <script>
+                document.getElementById("helpVideo").volume = 0.25;
+            </script>
+        </div>
+    </div>
+ 
+    <script>
+        const accountTab = document.getElementById('accountTab');
+        const privacyTab = document.getElementById('privacyTab');
+        const accessibilityTab = document.getElementById('accessibilityTab');
+        const helpTab = document.getElementById('helpTab');
+
+        const accountSection = document.getElementById('accountSection');
+        const privacySection = document.getElementById('privacySection');
+        const accessibilitySection = document.getElementById('accessibilitySection');
+        const helpSection = document.getElementById('helpSection');
+
+        const languageSelect = document.getElementById('language');
+        const themeSelect = document.getElementById('theme');
+        const displaySelect = document.getElementById('display');
+ 
+        function switchSection(activeTab, activeSection) {
+            document.querySelectorAll('ul li').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
+            activeTab.classList.add('active');
+            activeSection.classList.add('active');
+        }
+ 
+        accountTab.addEventListener('click', () => switchSection(accountTab, accountSection));
+        privacyTab.addEventListener('click', () => switchSection(privacyTab, privacySection));
+        accessibilityTab.addEventListener('click', () => switchSection(accessibilityTab, accessibilitySection));
+        helpTab.addEventListener('click', () => switchSection(helpTab, helpSection));
+ 
+        languageSelect.addEventListener('change', () => {
+            const selectedLang = languageSelect.value;
+            if (selectedLang === "Spanish") {
+                updateLanguage('es');
+            } else if (selectedLang === "French") {
+                updateLanguage('fr');
+            } else {
+                resetToEnglish(); 
+            }
+        });
+ 
+        themeSelect.addEventListener('change', () => {
+            if (themeSelect.value === "Dark Theme") {
+                document.body.style.backgroundColor = "#333";
+                document.body.style.color = "white";
+                document.querySelector('.container').style.backgroundColor = "#444";
+                document.querySelector('.sidebar').style.backgroundColor = "#555";
+            } else {
+                document.body.style.backgroundColor = "#f4f4f4";
+                document.body.style.color = "black";
+                document.querySelector('.container').style.backgroundColor = "white";
+                document.querySelector('.sidebar').style.backgroundColor = "#333";
+            }
+        });
+ 
+        displaySelect.addEventListener('change', () => {
+            if (displaySelect.value === "Large Text") {
+                document.body.style.fontSize = "1.2em";
+            } else if (displaySelect.value === "High Contrast") {
+                document.body.style.filter = "contrast(150%)";
+            } else {
+                document.body.style.fontSize = "1em";
+                document.body.style.filter = "contrast(100%)";
+            }
+        });
+ 
+        function updateLanguage(lang) {
+            if (lang === 'es') {
+                document.getElementById('settingsTitle').textContent = translations.es.settingsTitle;
+                document.getElementById('accountTitle').textContent = translations.es.accountTitle;
+                document.getElementById('accountInfoLabel').textContent = translations.es.accountInfoLabel;
+                document.getElementById('changePasswordLabel').textContent = translations.es.changePasswordLabel;
+                document.getElementById('deactivateLabel').textContent = translations.es.deactivateLabel;
+                document.getElementById('privacyTitle').textContent = translations.es.privacyTitle;
+                document.getElementById('yourPostsLabel').textContent = translations.es.yourPostsLabel;
+                document.getElementById('contentLabel').textContent = translations.es.contentLabel;
+                document.getElementById('muteLabel').textContent = translations.es.muteLabel;
+                document.getElementById('messagesLabel').textContent = translations.es.messagesLabel;
+                document.getElementById('adsLabel').textContent = translations.es.adsLabel;
+                document.getElementById('locationLabel').textContent = translations.es.locationLabel;
+                document.getElementById('accessibilityTitle').textContent = translations.es.accessibilityTitle;
+                document.getElementById('changeLanguageLabel').textContent = translations.es.changeLanguageLabel;
+                document.getElementById('themeLabel').textContent = translations.es.themeLabel;
+                document.getElementById('displayLabel').textContent = translations.es.displayLabel;
+                document.getElementById('helpTitle').textContent = translations.es.helpTitle;
+                document.getElementById('helpText').textContent = translations.es.helpText;
+                document.getElementById('helpText2').textContent = translations.es.helpText2;
+                document.getElementById('accountTab').textContent = translations.es.accountTab;
+                document.getElementById('privacyTab').textContent = translations.es.privacyTab;
+                document.getElementById('accessibilityTab').textContent = translations.es.accessibilityTab;
+                document.getElementById('helpTab').textContent = translations.es.helpTab;
+                document.getElementById('Back').textContent = translations.es.back;
+ 
+                document.getElementById('posts').innerHTML = `
+                    <option>Todos</option>
+                    <option>Seguidores</option>
+                    <option>Solo Yo</option>
+                `;
+                document.getElementById('content').innerHTML = `
+                    <option>Todo el Contenido</option>
+                    <option>Contenido Filtrado</option>
+                `;
+                document.getElementById('mute').innerHTML = `
+                    <option>Ninguna Cuenta Silenciada o Bloqueada</option>
+                `;
+                document.getElementById('messages').innerHTML = `
+                    <option>Todos</option>
+                    <option>Seguidores</option>
+                `;
+                document.getElementById('ads').innerHTML = `
+                    <option>Anuncios Personalizados</option>
+                    <option>Anuncios No Personalizados</option>
+                `;
+                document.getElementById('location').innerHTML = `
+                    <option>Usar Ubicación</option>
+                    <option>No Usar Ubicación</option>
+                `;
+                document.getElementById('theme').innerHTML = `
+                    <option>Tema Claro</option>
+                    <option>Tema Oscuro</option>
+                `;
+                document.getElementById('display').innerHTML = `
+                    <option>Predeterminado</option>
+                    <option>Texto Grande</option>
+                    <option>Alto Contraste</option>
+                `;
+ 
+            } else if (lang === 'fr') {
+                document.getElementById('settingsTitle').textContent = translations.fr.settingsTitle;
+                document.getElementById('accountTitle').textContent = translations.fr.accountTitle;
+                document.getElementById('accountInfoLabel').textContent = translations.fr.accountInfoLabel;
+                document.getElementById('changePasswordLabel').textContent = translations.fr.changePasswordLabel;
+                document.getElementById('deactivateLabel').textContent = translations.fr.deactivateLabel;
+                document.getElementById('privacyTitle').textContent = translations.fr.privacyTitle;
+                document.getElementById('yourPostsLabel').textContent = translations.fr.yourPostsLabel;
+                document.getElementById('contentLabel').textContent = translations.fr.contentLabel;
+                document.getElementById('muteLabel').textContent = translations.fr.muteLabel;
+                document.getElementById('messagesLabel').textContent = translations.fr.messagesLabel;
+                document.getElementById('adsLabel').textContent = translations.fr.adsLabel;
+                document.getElementById('locationLabel').textContent = translations.fr.locationLabel;
+                document.getElementById('accessibilityTitle').textContent = translations.fr.accessibilityTitle;
+                document.getElementById('changeLanguageLabel').textContent = translations.fr.changeLanguageLabel;
+                document.getElementById('themeLabel').textContent = translations.fr.themeLabel;
+                document.getElementById('displayLabel').textContent = translations.fr.displayLabel;
+                document.getElementById('helpTitle').textContent = translations.fr.helpTitle;
+                document.getElementById('helpText').textContent = translations.fr.helpText;
+                document.getElementById('helpText2').textContent = translations.fr.helpText2;
+                document.getElementById('accountTab').textContent = translations.fr.accountTab;
+                document.getElementById('privacyTab').textContent = translations.fr.privacyTab;
+                document.getElementById('accessibilityTab').textContent = translations.fr.accessibilityTab;
+                document.getElementById('helpTab').textContent = translations.fr.helpTab;
+                document.getElementById('Back').textContent = translations.fr.back;
+ 
+                document.getElementById('posts').innerHTML = `
+                    <option>Tous</option>
+                    <option>Abonnés</option>
+                    <option>Seulement Moi</option>
+                `;
+                document.getElementById('content').innerHTML = `
+                    <option>Tous les Contenus</option>
+                    <option>Contenu Filtré</option>
+                `;
+                document.getElementById('mute').innerHTML = `
+                    <option>Aucun Compte Muet ou Bloqué</option>
+                `;
+                document.getElementById('messages').innerHTML = `
+                    <option>Tous</option>
+                    <option>Abonnés</option>
+                `;
+                document.getElementById('ads').innerHTML = `
+                    <option>Annonces Personnalisées</option>
+                    <option>Annonces Non Personnalisées</option>
+                `;
+                document.getElementById('location').innerHTML = `
+                    <option>Utiliser la Localisation</option>
+                    <option>Ne Pas Utiliser la Localisation</option>
+                `;
+                document.getElementById('theme').innerHTML = `
+                    <option>Thème Clair</option>
+                    <option>Thème Sombre</option>
+                `;
+                document.getElementById('display').innerHTML = `
+                    <option>Par Défaut</option>
+                    <option>Texte Grand</option>
+                    <option>Contraste Élevé</option>
+                `;
+            }
+        }
+ 
+        function resetToEnglish() {
+            document.getElementById('settingsTitle').textContent = "Settings";
+            document.getElementById('accountTitle').textContent = "Your Account";
+            document.getElementById('accountInfoLabel').textContent = "Account Information";
+            document.getElementById('changePasswordLabel').textContent = "Change Password";
+            document.getElementById('deactivateLabel').textContent = "Deactivate Account";
+            document.getElementById('privacyTitle').textContent = "Privacy and Safety";
+            document.getElementById('yourPostsLabel').textContent = "Your Posts";
+            document.getElementById('contentLabel').textContent = "Content You See";
+            document.getElementById('muteLabel').textContent = "Mute and Block";
+            document.getElementById('messagesLabel').textContent = "Direct Messages";
+            document.getElementById('adsLabel').textContent = "Ad Preferences";
+            document.getElementById('locationLabel').textContent = "Location Information";
+            document.getElementById('accessibilityTitle').textContent = "Accessibility";
+            document.getElementById('changeLanguageLabel').textContent = "Change Language";
+            document.getElementById('themeLabel').textContent = "Theme";
+            document.getElementById('displayLabel').textContent = "Display Settings";
+            document.getElementById('helpTitle').textContent = "Help Center";
+            document.getElementById('helpText').textContent = "Visit our <a href=\"#\" style=\"color: blue;\">Help Center</a> for more information or to submit a support ticket.";
+            document.getElementById('helpText2').textContent = "If you have any issues or questions, you can contact our support team through the Help Center.";
+            document.getElementById('accountTab').textContent = "Your Account";
+            document.getElementById('privacyTab').textContent = "Privacy and Safety";
+            document.getElementById('accessibilityTab').textContent = "Accessibility";
+            document.getElementById('helpTab').textContent = "Help Center";
+            document.getElementById('Back').textContent = "Back";
+ 
+            document.getElementById('posts').innerHTML = `
+                <option>Everyone</option>
+                <option>Followers</option>
+                <option>Only Me</option>
+            `;
+            document.getElementById('content').innerHTML = `
+                <option>All Content</option>
+                <option>Filtered Content</option>
+            `;
+            document.getElementById('mute').innerHTML = `
+                <option>No Accounts Muted or Blocked</option>
+            `;
+            document.getElementById('messages').innerHTML = `
+                <option>Everyone</option>
+                <option>Followers</option>
+            `;
+            document.getElementById('ads').innerHTML = `
+                <option>Personalized Ads</option>
+                <option>Non-Personalized Ads</option>
+            `;
+            document.getElementById('location').innerHTML = `
+                <option>Use Location</option>
+                <option>Do Not Use Location</option>
+            `;
+            document.getElementById('theme').innerHTML = `
+                <option>Light Theme</option>
+                <option>Dark Theme</option>
+            `;
+            document.getElementById('display').innerHTML = `
+                <option>Default</option>
+                <option>Large Text</option>
+                <option>High Contrast</option>
+            `;
+        }
+ 
+        const translations = {
+            es: {
+                settingsTitle: "Configuraciones",
+                accountTitle: "Tu Cuenta",
+                accountInfoLabel: "Información de la Cuenta",
+                changePasswordLabel: "Cambiar Contraseña",
+                deactivateLabel: "Desactivar Cuenta",
+                privacyTitle: "Privacidad y Seguridad",
+                yourPostsLabel: "Tus Publicaciones",
+                contentLabel: "Contenido Que Ves",
+                muteLabel: "Silenciar y Bloquear",
+                messagesLabel: "Mensajes Directos",
+                adsLabel: "Preferencias de Anuncios",
+                locationLabel: "Información de Ubicación",
+                accessibilityTitle: "Accesibilidad",
+                changeLanguageLabel: "Cambiar Idioma",
+                themeLabel: "Tema",
+                displayLabel: "Configuraciones de Pantalla",
+                helpTitle: "Centro de Ayuda",
+                helpText: "Visita nuestro <a href=\"#\" style=\"color: blue;\">Centro de Ayuda</a> para más información o para enviar un ticket de soporte.",
+                helpText2: "Si tienes algún problema o pregunta, puedes contactar a nuestro equipo de soporte a través del Centro de Ayuda.",
+                accountTab: "Tu Cuenta",
+                privacyTab: "Privacidad y Seguridad",
+                accessibilityTab: "Accesibilidad",
+                helpTab: "Centro de Ayuda",
+                back: "Atrás"
+            },
+            fr: {
+                settingsTitle: "Paramètres",
+                accountTitle: "Votre Compte",
+                accountInfoLabel: "Informations sur le Compte",
+                changePasswordLabel: "Changer le Mot de Passe",
+                deactivateLabel: "Désactiver le Compte",
+                privacyTitle: "Confidentialité et Sécurité",
+                yourPostsLabel: "Vos Publications",
+                contentLabel: "Contenu Que Vous Voyez",
+                muteLabel: "Mettre en Sourdsine et Bloquer",
+                messagesLabel: "Messages Directs",
+                adsLabel: "Préférences Publicitaires",
+                locationLabel: "Informations sur la Localisation",
+                accessibilityTitle: "Accessibilité",
+                changeLanguageLabel: "Changer la Langue",
+                themeLabel: "Thème",
+                displayLabel: "Paramètres d'Affichage",
+                helpTitle: "Centre d'Aide",
+                helpText: "Visitez notre <a href=\"#\" style=\"color: blue;\">Centre d'Aide</a> pour plus d'informations ou pour soumettre un ticket de support.",
+                helpText2: "Si vous avez des problèmes ou des questions, vous pouvez contacter notre équipe de support via le Centre d'Aide.",
+                accountTab: "Votre Compte",
+                privacyTab: "Confidentialité et Sécurité",
+                accessibilityTab: "Accessibilité",
+                helpTab: "Centre d'Aide",
+                back: "Retour"
+            }
+        };
+    </script>
+ 
+</body>
+</html>
+ 
